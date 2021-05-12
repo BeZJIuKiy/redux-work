@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useActions } from '../hooks/useActions';
 import { useTypeSelector } from '../hooks/useTypeSelector';
 import { fetchUsers } from '../store/action-creator/user';
 
@@ -8,10 +9,10 @@ export const UserList: React.FC = () => {
 
     // Получаем текущее состояние
     const { users, loading, error } = useTypeSelector(state => state.user);
-    const dispatch = useDispatch();
+    const { fetchUsers } = useActions();
 
     useEffect(() => {
-        dispatch(fetchUsers());
+        fetchUsers();
     }, []);
 
     if (loading) {
@@ -23,7 +24,7 @@ export const UserList: React.FC = () => {
 
     return (
         <div>
-            {users.map(user => 
+            {users.map(user =>
                 <div key={user.id}>{user.name}</div>
             )}
         </div>

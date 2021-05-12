@@ -19,10 +19,8 @@ export const fetchUsers = () => {
         } catch (e) {
             dispatch({
                 type: UserActionTypes.FETCH_USERS_ERROR,
-                payload: 'Произошла ошибка при загрузке ползователей',
+                payload: 'Произошла ошибка при загрузке пользователей',
             });
         }
-
-
     }
 }
