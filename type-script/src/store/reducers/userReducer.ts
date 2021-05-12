@@ -1,23 +1,27 @@
+import { UserAction, UserActionTypes, UserState } from "../../types/user"
 
-interface UserState {
-    users: any[];
-    loading: boolean;
-    error: null | string;
-}
-
+// STATE по умолчанию
 const initialState: UserState = {
     users: [],
     loading: false,
     error: null,
 }
 
-
-export const userReducer = (state = initialState, action) => {
+// Reducer, UserState - сообщает, что возвращаться будет объект типа UserState
+export const userReducer = (state = initialState, action: UserAction): UserState => {
     switch (action.type) {
-        case : {
-            return 
+        case UserActionTypes.FETCH_USERS: {
+            return { users: [], loading: true, error: null }
         }
-        
+
+        case UserActionTypes.FETCH_USERS_SUCCESS: {
+            return { users: action.payload, loading: false, error: null }
+        }
+
+        case UserActionTypes.FETCH_USERS_ERROR: {
+            return { users: [], loading: false, error: action.payload }
+        }
+
         default: return state;
     }
 }
